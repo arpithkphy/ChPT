@@ -969,7 +969,7 @@ function bindUI(){
     resizeTimer=setTimeout(()=>{ fitCanvases(); drawStage(); drawAux(); },120);
   });
   const ts=$('theme-switcher');
-  try{ if(localStorage.getItem('theme')==='light') document.body.classList.add('light-theme'); }catch(e){}
+  try{ if(localStorage.getItem('theme')!== 'dark') document.body.classList.add('light-theme'); }catch(e){}
   ts.onclick=()=>{
     document.body.classList.toggle('light-theme');
     try{ localStorage.setItem('theme',document.body.classList.contains('light-theme')?'light':'dark'); }catch(e){}
