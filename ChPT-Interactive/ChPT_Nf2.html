@@ -256,7 +256,7 @@ const physics = {
   }
 };
 
-// ---- generated from chpt.oracle with m_pi=140, f_pi=92; the page checks itself ----
+// Regression values from chpt.oracle; these check the JS formulas, not the physics itself.
 const GOLDEN = [
   [0.5, 0, 1, 0, 0, 0], [1, 0, 1, 0, 0, 0],
   [2, 1.318116071652818, 0.25, 0.9682458365518543, 1.125, 1.875]
@@ -442,12 +442,12 @@ const LAW_MATH = {
 const PRESETS = {
   course:   { name:'Course',    mpi:140,    fpi:92,   note:'140 / 92 MeV' },
   pdg:      { name:'PDG',       mpi:139.57, fpi:92.1, note:'physical point' },
-  heavy:    { name:'Heavy pion',mpi:200,    fpi:92,   note:'lattice ensemble' }
+  heavy:    { name:'Illustrative heavy pion',mpi:200,fpi:92,note:'not a matched lattice ensemble' }
 };
 
 const STOPS = [
   ['Vacuum', 0.5], ['Silver Blaze', 0.999], ['Onset', 1],
-  ['Just above', 1.001], ['Conformal', Math.pow(3,0.25)], ['cos&alpha;=1/4', 2], ['Deep', 5]
+  ['Just above', 1.001], ['Conformal', Math.pow(3,0.25)], ['cos&alpha;=1/4', 2], ['LO extrapolation', 3]
 ];
 
 const S = {
@@ -1607,7 +1607,7 @@ function buildTheory(){
   <div class="hbox hb-gold"><b>What b changes, precisely.</b> Above onset the flat direction gives a linear mode either way &mdash; but b lowers its slope from 1 to c<sub>s</sub>. Exactly at onset it does something different: it turns the linear mode into a <em>quadratic</em> one, &epsilon; &prop; q&sup2;. Switch b off in the Excitations tab and read the slopes off the log-log axes. The b = 0 curve is a counterfactual, not another &chi;PT state.</div>
 
   <h3>Where this stops being true</h3>
-  <p>This is leading order at zero temperature. NLO leaves the onset and the order of the transition unchanged &mdash; both are symmetry consequences, independent of the low-energy constants &mdash; but it does change quantitative reach. The LO conformal crossing sits at r = 3<sup>1/4</sup> &asymp; 1.316; the lattice value is about 1.29. That two-percent difference is a <em>result</em>, not a discrepancy between two attempts at the same number. This page is self-contained: its interactive calculations and plots run entirely within this HTML file.</p>
+  <p>This is leading order at zero temperature and zero pion source. At zero source, NLO leaves the onset at the physical pion mass and the transition second order, but changes quantitative predictions. The LO sound speed reaches c<sub>s</sub>&sup2; = 1/3 at r = 3<sup>1/4</sup> &asymp; 1.316. At large r, such as the r = 3 tour stop, these curves are formal LO extrapolations, not quantitative QCD predictions. The built-in checks compare JavaScript results with stored LO benchmarks; they are not independent physics validation. This page is self-contained: its interactive calculations and plots run entirely within this HTML file.</p>
   `;
 }
 
@@ -1616,7 +1616,7 @@ function init(){
   try{
     const n=goldenCheck();
     const s=$('check-status');
-    s.textContent='✓ '+n+' checks';
+    s.textContent='✓ '+n+' formula checks';
     s.style.color='var(--green)';
   }catch(e){
     const s=$('check-status');
